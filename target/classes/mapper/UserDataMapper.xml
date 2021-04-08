@@ -6,11 +6,7 @@
       <idArg column="id" javaType="java.lang.String" jdbcType="CHAR" />
       <arg column="nickname" javaType="java.lang.String" jdbcType="CHAR" />
       <arg column="password" javaType="java.lang.String" jdbcType="CHAR" />
-      <arg column="telnumber" javaType="java.lang.String" jdbcType="CHAR" />
-      <arg column="shorttelnumber" javaType="java.lang.String" jdbcType="CHAR" />
       <arg column="displayurl" javaType="java.lang.String" jdbcType="CHAR" />
-      <arg column="loginstatus" javaType="java.lang.Boolean" jdbcType="TINYINT" />
-      <arg column="isleave" javaType="java.lang.Boolean" jdbcType="TINYINT" />
     </constructor>
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.aurora.domain.UserData">
@@ -18,11 +14,7 @@
       <idArg column="id" javaType="java.lang.String" jdbcType="CHAR" />
       <arg column="nickname" javaType="java.lang.String" jdbcType="CHAR" />
       <arg column="password" javaType="java.lang.String" jdbcType="CHAR" />
-      <arg column="telnumber" javaType="java.lang.String" jdbcType="CHAR" />
-      <arg column="shorttelnumber" javaType="java.lang.String" jdbcType="CHAR" />
       <arg column="displayurl" javaType="java.lang.String" jdbcType="CHAR" />
-      <arg column="loginstatus" javaType="java.lang.Boolean" jdbcType="TINYINT" />
-      <arg column="isleave" javaType="java.lang.Boolean" jdbcType="TINYINT" />
       <arg column="bg" javaType="_byte[]" jdbcType="LONGVARBINARY" />
     </constructor>
   </resultMap>
@@ -56,7 +48,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, nickname, password, telnumber, shorttelnumber, displayurl, loginstatus, isleave
+    id, nickname, password, displayurl
   </sql>
   <sql id="Blob_Column_List">
     bg
@@ -107,13 +99,9 @@
   </delete>
   <insert id="insert" parameterType="com.aurora.domain.UserData">
     insert into userdata (id, nickname, password, 
-      telnumber, shorttelnumber, displayurl, 
-      loginstatus, isleave, bg
-      )
+      displayurl, bg)
     values (#{id,jdbcType=CHAR}, #{nickname,jdbcType=CHAR}, #{password,jdbcType=CHAR}, 
-      #{telnumber,jdbcType=CHAR}, #{shorttelnumber,jdbcType=CHAR}, #{displayurl,jdbcType=CHAR}, 
-      #{loginstatus,jdbcType=TINYINT}, #{isleave,jdbcType=TINYINT}, #{bg,jdbcType=LONGVARBINARY}
-      )
+      #{displayurl,jdbcType=CHAR}, #{bg,jdbcType=LONGVARBINARY})
   </insert>
   <insert id="insertSelective" parameterType="com.aurora.domain.UserData">
     insert into userdata
@@ -127,20 +115,8 @@
       <if test="password != null">
         password,
       </if>
-      <if test="telnumber != null">
-        telnumber,
-      </if>
-      <if test="shorttelnumber != null">
-        shorttelnumber,
-      </if>
       <if test="displayurl != null">
         displayurl,
-      </if>
-      <if test="loginstatus != null">
-        loginstatus,
-      </if>
-      <if test="isleave != null">
-        isleave,
       </if>
       <if test="bg != null">
         bg,
@@ -156,20 +132,8 @@
       <if test="password != null">
         #{password,jdbcType=CHAR},
       </if>
-      <if test="telnumber != null">
-        #{telnumber,jdbcType=CHAR},
-      </if>
-      <if test="shorttelnumber != null">
-        #{shorttelnumber,jdbcType=CHAR},
-      </if>
       <if test="displayurl != null">
         #{displayurl,jdbcType=CHAR},
-      </if>
-      <if test="loginstatus != null">
-        #{loginstatus,jdbcType=TINYINT},
-      </if>
-      <if test="isleave != null">
-        #{isleave,jdbcType=TINYINT},
       </if>
       <if test="bg != null">
         #{bg,jdbcType=LONGVARBINARY},
@@ -185,20 +149,8 @@
       <if test="password != null">
         password = #{password,jdbcType=CHAR},
       </if>
-      <if test="telnumber != null">
-        telnumber = #{telnumber,jdbcType=CHAR},
-      </if>
-      <if test="shorttelnumber != null">
-        shorttelnumber = #{shorttelnumber,jdbcType=CHAR},
-      </if>
       <if test="displayurl != null">
         displayurl = #{displayurl,jdbcType=CHAR},
-      </if>
-      <if test="loginstatus != null">
-        loginstatus = #{loginstatus,jdbcType=TINYINT},
-      </if>
-      <if test="isleave != null">
-        isleave = #{isleave,jdbcType=TINYINT},
       </if>
       <if test="bg != null">
         bg = #{bg,jdbcType=LONGVARBINARY},
@@ -210,11 +162,7 @@
     update userdata
     set nickname = #{nickname,jdbcType=CHAR},
       password = #{password,jdbcType=CHAR},
-      telnumber = #{telnumber,jdbcType=CHAR},
-      shorttelnumber = #{shorttelnumber,jdbcType=CHAR},
       displayurl = #{displayurl,jdbcType=CHAR},
-      loginstatus = #{loginstatus,jdbcType=TINYINT},
-      isleave = #{isleave,jdbcType=TINYINT},
       bg = #{bg,jdbcType=LONGVARBINARY}
     where id = #{id,jdbcType=CHAR}
   </update>
@@ -222,11 +170,7 @@
     update userdata
     set nickname = #{nickname,jdbcType=CHAR},
       password = #{password,jdbcType=CHAR},
-      telnumber = #{telnumber,jdbcType=CHAR},
-      shorttelnumber = #{shorttelnumber,jdbcType=CHAR},
-      displayurl = #{displayurl,jdbcType=CHAR},
-      loginstatus = #{loginstatus,jdbcType=TINYINT},
-      isleave = #{isleave,jdbcType=TINYINT}
+      displayurl = #{displayurl,jdbcType=CHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
 </mapper>

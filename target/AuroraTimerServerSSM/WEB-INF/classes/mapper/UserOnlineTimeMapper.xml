@@ -4,16 +4,9 @@
   <resultMap id="BaseResultMap" type="com.aurora.domain.UserOnlineTime">
     <constructor>
       <idArg column="id" javaType="java.lang.String" jdbcType="CHAR" />
-      <idArg column="todaydate" javaType="java.util.Date" jdbcType="DATE" />
-      <arg column="lastonlinetime" javaType="java.util.Date" jdbcType="TIME" />
-    </constructor>
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.aurora.domain.UserOnlineTime">
-    <constructor>
-      <idArg column="id" javaType="java.lang.String" jdbcType="CHAR" />
-      <idArg column="todaydate" javaType="java.util.Date" jdbcType="DATE" />
-      <arg column="lastonlinetime" javaType="java.util.Date" jdbcType="TIME" />
-      <arg column="todayonlinetime" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+      <idArg column="today_date" javaType="java.util.Date" jdbcType="DATE" />
+      <arg column="today_online_time" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="last_online_time" javaType="java.util.Date" jdbcType="TIME" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -46,28 +39,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, todaydate, lastonlinetime
+    id, today_date, today_online_time, last_online_time
   </sql>
-  <sql id="Blob_Column_List">
-    todayonlinetime
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.aurora.domain.UserOnlineTimeExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    'false' as QUERYID,
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from useronlinetime
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" parameterType="com.aurora.domain.UserOnlineTimeExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -83,25 +56,23 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="com.aurora.domain.UserOnlineTimeKey" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="com.aurora.domain.UserOnlineTimeKey" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from useronlinetime
     where id = #{id,jdbcType=CHAR}
-      and todaydate = #{todaydate,jdbcType=DATE}
+      and today_date = #{todayDate,jdbcType=DATE}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.aurora.domain.UserOnlineTimeKey">
     delete from useronlinetime
     where id = #{id,jdbcType=CHAR}
-      and todaydate = #{todaydate,jdbcType=DATE}
+      and today_date = #{todayDate,jdbcType=DATE}
   </delete>
   <insert id="insert" parameterType="com.aurora.domain.UserOnlineTime">
-    insert into useronlinetime (id, todaydate, lastonlinetime, 
-      todayonlinetime)
-    values (#{id,jdbcType=CHAR}, #{todaydate,jdbcType=DATE}, #{lastonlinetime,jdbcType=TIME}, 
-      #{todayonlinetime,jdbcType=LONGVARCHAR})
+    insert into useronlinetime (id, today_date, today_online_time, 
+      last_online_time)
+    values (#{id,jdbcType=CHAR}, #{todayDate,jdbcType=DATE}, #{todayOnlineTime,jdbcType=BIGINT}, 
+      #{lastOnlineTime,jdbcType=TIME})
   </insert>
   <insert id="insertSelective" parameterType="com.aurora.domain.UserOnlineTime">
     insert into useronlinetime
@@ -109,55 +80,49 @@
       <if test="id != null">
         id,
       </if>
-      <if test="todaydate != null">
-        todaydate,
+      <if test="todayDate != null">
+        today_date,
       </if>
-      <if test="lastonlinetime != null">
-        lastonlinetime,
+      <if test="todayOnlineTime != null">
+        today_online_time,
       </if>
-      <if test="todayonlinetime != null">
-        todayonlinetime,
+      <if test="lastOnlineTime != null">
+        last_online_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=CHAR},
       </if>
-      <if test="todaydate != null">
-        #{todaydate,jdbcType=DATE},
+      <if test="todayDate != null">
+        #{todayDate,jdbcType=DATE},
       </if>
-      <if test="lastonlinetime != null">
-        #{lastonlinetime,jdbcType=TIME},
+      <if test="todayOnlineTime != null">
+        #{todayOnlineTime,jdbcType=BIGINT},
       </if>
-      <if test="todayonlinetime != null">
-        #{todayonlinetime,jdbcType=LONGVARCHAR},
+      <if test="lastOnlineTime != null">
+        #{lastOnlineTime,jdbcType=TIME},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.aurora.domain.UserOnlineTime">
     update useronlinetime
     <set>
-      <if test="lastonlinetime != null">
-        lastonlinetime = #{lastonlinetime,jdbcType=TIME},
+      <if test="todayOnlineTime != null">
+        today_online_time = #{todayOnlineTime,jdbcType=BIGINT},
       </if>
-      <if test="todayonlinetime != null">
-        todayonlinetime = #{todayonlinetime,jdbcType=LONGVARCHAR},
+      <if test="lastOnlineTime != null">
+        last_online_time = #{lastOnlineTime,jdbcType=TIME},
       </if>
     </set>
     where id = #{id,jdbcType=CHAR}
-      and todaydate = #{todaydate,jdbcType=DATE}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.aurora.domain.UserOnlineTime">
-    update useronlinetime
-    set lastonlinetime = #{lastonlinetime,jdbcType=TIME},
-      todayonlinetime = #{todayonlinetime,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=CHAR}
-      and todaydate = #{todaydate,jdbcType=DATE}
+      and today_date = #{todayDate,jdbcType=DATE}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.aurora.domain.UserOnlineTime">
     update useronlinetime
-    set lastonlinetime = #{lastonlinetime,jdbcType=TIME}
+    set today_online_time = #{todayOnlineTime,jdbcType=BIGINT},
+      last_online_time = #{lastOnlineTime,jdbcType=TIME}
     where id = #{id,jdbcType=CHAR}
-      and todaydate = #{todaydate,jdbcType=DATE}
+      and today_date = #{todayDate,jdbcType=DATE}
   </update>
 </mapper>

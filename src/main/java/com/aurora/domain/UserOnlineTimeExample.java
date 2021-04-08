@@ -228,183 +228,183 @@ public class UserOnlineTimeExample {
             return (Criteria) this;
         }
 
-        public Criteria andTodaydateIsNull() {
-            addCriterion("todaydate is null");
+        public Criteria andTodayDateIsNull() {
+            addCriterion("today_date is null");
             return (Criteria) this;
         }
 
-        public Criteria andTodaydateIsNotNull() {
-            addCriterion("todaydate is not null");
+        public Criteria andTodayDateIsNotNull() {
+            addCriterion("today_date is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTodaydateEqualTo(Date value) {
-            addCriterionForJDBCDate("todaydate =", value, "todaydate");
+        public Criteria andTodayDateEqualTo(Date value) {
+            addCriterionForJDBCDate("today_date =", value, "todayDate");
             return (Criteria) this;
         }
 
-        public Criteria andTodaydateNotEqualTo(Date value) {
-            addCriterionForJDBCDate("todaydate <>", value, "todaydate");
+        public Criteria andTodayDateNotEqualTo(Date value) {
+            addCriterionForJDBCDate("today_date <>", value, "todayDate");
             return (Criteria) this;
         }
 
-        public Criteria andTodaydateGreaterThan(Date value) {
-            addCriterionForJDBCDate("todaydate >", value, "todaydate");
+        public Criteria andTodayDateGreaterThan(Date value) {
+            addCriterionForJDBCDate("today_date >", value, "todayDate");
             return (Criteria) this;
         }
 
-        public Criteria andTodaydateGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("todaydate >=", value, "todaydate");
+        public Criteria andTodayDateGreaterThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("today_date >=", value, "todayDate");
             return (Criteria) this;
         }
 
-        public Criteria andTodaydateLessThan(Date value) {
-            addCriterionForJDBCDate("todaydate <", value, "todaydate");
+        public Criteria andTodayDateLessThan(Date value) {
+            addCriterionForJDBCDate("today_date <", value, "todayDate");
             return (Criteria) this;
         }
 
-        public Criteria andTodaydateLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCDate("todaydate <=", value, "todaydate");
+        public Criteria andTodayDateLessThanOrEqualTo(Date value) {
+            addCriterionForJDBCDate("today_date <=", value, "todayDate");
             return (Criteria) this;
         }
 
-        public Criteria andTodaydateIn(List<Date> values) {
-            addCriterionForJDBCDate("todaydate in", values, "todaydate");
+        public Criteria andTodayDateIn(List<Date> values) {
+            addCriterionForJDBCDate("today_date in", values, "todayDate");
             return (Criteria) this;
         }
 
-        public Criteria andTodaydateNotIn(List<Date> values) {
-            addCriterionForJDBCDate("todaydate not in", values, "todaydate");
+        public Criteria andTodayDateNotIn(List<Date> values) {
+            addCriterionForJDBCDate("today_date not in", values, "todayDate");
             return (Criteria) this;
         }
 
-        public Criteria andTodaydateBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("todaydate between", value1, value2, "todaydate");
+        public Criteria andTodayDateBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("today_date between", value1, value2, "todayDate");
             return (Criteria) this;
         }
 
-        public Criteria andTodaydateNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCDate("todaydate not between", value1, value2, "todaydate");
+        public Criteria andTodayDateNotBetween(Date value1, Date value2) {
+            addCriterionForJDBCDate("today_date not between", value1, value2, "todayDate");
             return (Criteria) this;
         }
 
-        public Criteria andTodayonlinetimeIsNull() {
-            addCriterion("todayonlinetime is null");
+        public Criteria andTodayOnlineTimeIsNull() {
+            addCriterion("today_online_time is null");
             return (Criteria) this;
         }
 
-        public Criteria andTodayonlinetimeIsNotNull() {
-            addCriterion("todayonlinetime is not null");
+        public Criteria andTodayOnlineTimeIsNotNull() {
+            addCriterion("today_online_time is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTodayonlinetimeEqualTo(Long value) {
-            addCriterion("todayonlinetime =", value, "todayonlinetime");
+        public Criteria andTodayOnlineTimeEqualTo(Long value) {
+            addCriterion("today_online_time =", value, "todayOnlineTime");
             return (Criteria) this;
         }
 
-        public Criteria andTodayonlinetimeNotEqualTo(Long value) {
-            addCriterion("todayonlinetime <>", value, "todayonlinetime");
+        public Criteria andTodayOnlineTimeNotEqualTo(Long value) {
+            addCriterion("today_online_time <>", value, "todayOnlineTime");
             return (Criteria) this;
         }
 
-        public Criteria andTodayonlinetimeGreaterThan(Long value) {
-            addCriterion("todayonlinetime >", value, "todayonlinetime");
+        public Criteria andTodayOnlineTimeGreaterThan(Long value) {
+            addCriterion("today_online_time >", value, "todayOnlineTime");
             return (Criteria) this;
         }
 
-        public Criteria andTodayonlinetimeGreaterThanOrEqualTo(Long value) {
-            addCriterion("todayonlinetime >=", value, "todayonlinetime");
+        public Criteria andTodayOnlineTimeGreaterThanOrEqualTo(Long value) {
+            addCriterion("today_online_time >=", value, "todayOnlineTime");
             return (Criteria) this;
         }
 
-        public Criteria andTodayonlinetimeLessThan(Long value) {
-            addCriterion("todayonlinetime <", value, "todayonlinetime");
+        public Criteria andTodayOnlineTimeLessThan(Long value) {
+            addCriterion("today_online_time <", value, "todayOnlineTime");
             return (Criteria) this;
         }
 
-        public Criteria andTodayonlinetimeLessThanOrEqualTo(Long value) {
-            addCriterion("todayonlinetime <=", value, "todayonlinetime");
+        public Criteria andTodayOnlineTimeLessThanOrEqualTo(Long value) {
+            addCriterion("today_online_time <=", value, "todayOnlineTime");
             return (Criteria) this;
         }
 
-        public Criteria andTodayonlinetimeIn(List<Long> values) {
-            addCriterion("todayonlinetime in", values, "todayonlinetime");
+        public Criteria andTodayOnlineTimeIn(List<Long> values) {
+            addCriterion("today_online_time in", values, "todayOnlineTime");
             return (Criteria) this;
         }
 
-        public Criteria andTodayonlinetimeNotIn(List<Long> values) {
-            addCriterion("todayonlinetime not in", values, "todayonlinetime");
+        public Criteria andTodayOnlineTimeNotIn(List<Long> values) {
+            addCriterion("today_online_time not in", values, "todayOnlineTime");
             return (Criteria) this;
         }
 
-        public Criteria andTodayonlinetimeBetween(Long value1, Long value2) {
-            addCriterion("todayonlinetime between", value1, value2, "todayonlinetime");
+        public Criteria andTodayOnlineTimeBetween(Long value1, Long value2) {
+            addCriterion("today_online_time between", value1, value2, "todayOnlineTime");
             return (Criteria) this;
         }
 
-        public Criteria andTodayonlinetimeNotBetween(Long value1, Long value2) {
-            addCriterion("todayonlinetime not between", value1, value2, "todayonlinetime");
+        public Criteria andTodayOnlineTimeNotBetween(Long value1, Long value2) {
+            addCriterion("today_online_time not between", value1, value2, "todayOnlineTime");
             return (Criteria) this;
         }
 
-        public Criteria andLastonlinetimeIsNull() {
-            addCriterion("lastonlinetime is null");
+        public Criteria andLastOnlineTimeIsNull() {
+            addCriterion("last_online_time is null");
             return (Criteria) this;
         }
 
-        public Criteria andLastonlinetimeIsNotNull() {
-            addCriterion("lastonlinetime is not null");
+        public Criteria andLastOnlineTimeIsNotNull() {
+            addCriterion("last_online_time is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLastonlinetimeEqualTo(Date value) {
-            addCriterionForJDBCTime("lastonlinetime =", value, "lastonlinetime");
+        public Criteria andLastOnlineTimeEqualTo(Date value) {
+            addCriterionForJDBCTime("last_online_time =", value, "lastOnlineTime");
             return (Criteria) this;
         }
 
-        public Criteria andLastonlinetimeNotEqualTo(Date value) {
-            addCriterionForJDBCTime("lastonlinetime <>", value, "lastonlinetime");
+        public Criteria andLastOnlineTimeNotEqualTo(Date value) {
+            addCriterionForJDBCTime("last_online_time <>", value, "lastOnlineTime");
             return (Criteria) this;
         }
 
-        public Criteria andLastonlinetimeGreaterThan(Date value) {
-            addCriterionForJDBCTime("lastonlinetime >", value, "lastonlinetime");
+        public Criteria andLastOnlineTimeGreaterThan(Date value) {
+            addCriterionForJDBCTime("last_online_time >", value, "lastOnlineTime");
             return (Criteria) this;
         }
 
-        public Criteria andLastonlinetimeGreaterThanOrEqualTo(Date value) {
-            addCriterionForJDBCTime("lastonlinetime >=", value, "lastonlinetime");
+        public Criteria andLastOnlineTimeGreaterThanOrEqualTo(Date value) {
+            addCriterionForJDBCTime("last_online_time >=", value, "lastOnlineTime");
             return (Criteria) this;
         }
 
-        public Criteria andLastonlinetimeLessThan(Date value) {
-            addCriterionForJDBCTime("lastonlinetime <", value, "lastonlinetime");
+        public Criteria andLastOnlineTimeLessThan(Date value) {
+            addCriterionForJDBCTime("last_online_time <", value, "lastOnlineTime");
             return (Criteria) this;
         }
 
-        public Criteria andLastonlinetimeLessThanOrEqualTo(Date value) {
-            addCriterionForJDBCTime("lastonlinetime <=", value, "lastonlinetime");
+        public Criteria andLastOnlineTimeLessThanOrEqualTo(Date value) {
+            addCriterionForJDBCTime("last_online_time <=", value, "lastOnlineTime");
             return (Criteria) this;
         }
 
-        public Criteria andLastonlinetimeIn(List<Date> values) {
-            addCriterionForJDBCTime("lastonlinetime in", values, "lastonlinetime");
+        public Criteria andLastOnlineTimeIn(List<Date> values) {
+            addCriterionForJDBCTime("last_online_time in", values, "lastOnlineTime");
             return (Criteria) this;
         }
 
-        public Criteria andLastonlinetimeNotIn(List<Date> values) {
-            addCriterionForJDBCTime("lastonlinetime not in", values, "lastonlinetime");
+        public Criteria andLastOnlineTimeNotIn(List<Date> values) {
+            addCriterionForJDBCTime("last_online_time not in", values, "lastOnlineTime");
             return (Criteria) this;
         }
 
-        public Criteria andLastonlinetimeBetween(Date value1, Date value2) {
-            addCriterionForJDBCTime("lastonlinetime between", value1, value2, "lastonlinetime");
+        public Criteria andLastOnlineTimeBetween(Date value1, Date value2) {
+            addCriterionForJDBCTime("last_online_time between", value1, value2, "lastOnlineTime");
             return (Criteria) this;
         }
 
-        public Criteria andLastonlinetimeNotBetween(Date value1, Date value2) {
-            addCriterionForJDBCTime("lastonlinetime not between", value1, value2, "lastonlinetime");
+        public Criteria andLastOnlineTimeNotBetween(Date value1, Date value2) {
+            addCriterionForJDBCTime("last_online_time not between", value1, value2, "lastOnlineTime");
             return (Criteria) this;
         }
     }

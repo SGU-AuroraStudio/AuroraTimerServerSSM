@@ -32,31 +32,29 @@ public class UserOnlineTimeServiceImpl implements IUserOnlineTimeService {
         UserOnlineTimeExample example = new UserOnlineTimeExample();
         UserOnlineTimeExample.Criteria criteria = example.createCriteria();
         criteria.andIdEqualTo(id);
-        criteria.andTodaydateEqualTo(new java.util.Date());
+        criteria.andTodayDateEqualTo(new java.util.Date());
         List<UserOnlineTime> list = userOnlineTimeMapper.selectByExample(example);
 
         UserOnlineTime vo;
         //今日第一次上线
-        if(list==null){
+        if(list.size()==0){
             vo=new UserOnlineTime(id, dateNow, 0l, new Date());
-            userOnlineTimeMapper.insert(vo);
+            return userOnlineTimeMapper.insert(vo)>0;
         }else {//不是第一次上线
             vo = list.get(0);
             //正常情况，两次请求在设定间隔时间内
             if ((timeNow.getTime() - vo.getLastOnlineTime().getTime()) < intervalTime){
                 UserOnlineTime voUpdate = new UserOnlineTime(id, dateNow, timeNow.getTime()-vo.getLastOnlineTime().getTime(), dateNow);
-                userOnlineTimeMapper.insert(voUpdate);
+                return userOnlineTimeMapper.updateByPrimaryKeySelective(voUpdate)>0;
             }else{//两次请求间隔过长，上线后又下线很久
                 UserOnlineTime voUpdate = new UserOnlineTime(id, dateNow, timeNow.getTime(), vo.getLastOnlineTime());
-                userOnlineTimeMapper.updateByPrimaryKeySelective(voUpdate);
+                return userOnlineTimeMapper.updateByPrimaryKeySelective(voUpdate)>0;
             }
         }
-        return false;
     }
 
     @Override
-    public Set<UserOnlineTime> lastXWeekData(int x) {
-        Set<UserOnlineTime> set = new HashSet<>();
+    public List<UserOnlineTime> lastXWeekData(int x) {
         Date dateNow = new Date();
         UserOnlineTimeExample example = new UserOnlineTimeExample();
         UserOnlineTimeExample.Criteria criteria = example.createCriteria();
@@ -69,7 +67,7 @@ public class UserOnlineTimeServiceImpl implements IUserOnlineTimeService {
         //设置查询条件，计算查询日期
         //查询本周，查询这周开头即周日到今天的记录
         if(x==0){
-            criteria.andTodaydateBetween(calendar.getTime(), dateNow);
+            criteria.andTodayDateBetween(calendar.getTime(), dateNow);
         }else {
             //这周开头-x*7即为x周前的第一天
             calendar.add(Calendar.DATE, -x*7);
@@ -77,25 +75,38 @@ public class UserOnlineTimeServiceImpl implements IUserOnlineTimeService {
             //+7为最后一天
             calendar.add(Calendar.DATE,7);
             Date lastWeekSaturday = calendar.getTime();
-            criteria.andTodaydateBetween(lastXWeekSunday, lastWeekSaturday);
+            criteria.andTodayDateBetween(lastXWeekSunday, lastWeekSaturday);
         }
         List<UserOnlineTime> userOnlineTimes = userOnlineTimeMapper.selectByExample(example);
-        set.addAll(userOnlineTimes);
-        return set;
+        return userOnlineTimes;
     }
 
     @Override
-    public Set<UserOnlineTime> todayData() {
-        return null;
+    public List<UserOnlineTime> todayData() {
+        UserOnlineTimeExample example = new UserOnlineTimeExample();
+        UserOnlineTimeExample.Criteria criteria = example.createCriteria();
+        criteria.andTodayDateEqualTo(new Date());
+        return userOnlineTimeMapper.selectByExample(example);
     }
 
     @Override
-    public UserOnlineTime searchByUnique(String id, Date date) {
-        return null;
+    public UserOnlineTime searchByIdAndDate(String id, Date date) {
+        UserOnlineTimeExample example = new UserOnlineTimeExample();
+        UserOnlineTimeExample.Criteria criteria = example.createCriteria();
+        criteria.andIdEqualTo(id);
+        criteria.andTodayDateEqualTo(date);
+        List<UserOnlineTime> list = userOnlineTimeMapper.selectByExample(example);
+        if(list.size()==0)
+            return null;
+        return list.get(0);
     }
 
     @Override
-    public Set<UserOnlineTime> searchByFromDate2Today(Date dateStart) {
-        return null;
+    public List<UserOnlineTime> searchByFromDate2Today(Date dateStart) {
+        UserOnlineTimeExample example = new UserOnlineTimeExample();
+        UserOnlineTimeExample.Criteria criteria = example.createCriteria();
+        criteria.andTodayDateBetween(dateStart, new Date());
+        List<UserOnlineTime> userOnlineTimes = userOnlineTimeMapper.selectByExample(example);
+        return userOnlineTimes;
     }
 }

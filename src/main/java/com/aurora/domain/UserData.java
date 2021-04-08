@@ -7,27 +7,15 @@ public class UserData {
 
     private String password;
 
-    private String telnumber;
-
-    private String shorttelnumber;
-
     private String displayurl;
-
-    private Boolean loginstatus;
-
-    private Boolean isleave;
 
     private byte[] bg;
 
-    public UserData(String id, String nickname, String password, String telnumber, String shorttelnumber, String displayurl, Boolean loginstatus, Boolean isleave, byte[] bg) {
+    public UserData(String id, String nickname, String password, String displayurl, byte[] bg) {
         this.id = id;
         this.nickname = nickname;
         this.password = password;
-        this.telnumber = telnumber;
-        this.shorttelnumber = shorttelnumber;
         this.displayurl = displayurl;
-        this.loginstatus = loginstatus;
-        this.isleave = isleave;
         this.bg = bg;
     }
 
@@ -36,7 +24,9 @@ public class UserData {
         this.password = password;
     }
 
-    public UserData() { }
+    public UserData() {
+        super();
+    }
 
     public String getId() {
         return id;
@@ -62,44 +52,12 @@ public class UserData {
         this.password = password == null ? null : password.trim();
     }
 
-    public String getTelnumber() {
-        return telnumber;
-    }
-
-    public void setTelnumber(String telnumber) {
-        this.telnumber = telnumber == null ? null : telnumber.trim();
-    }
-
-    public String getShorttelnumber() {
-        return shorttelnumber;
-    }
-
-    public void setShorttelnumber(String shorttelnumber) {
-        this.shorttelnumber = shorttelnumber == null ? null : shorttelnumber.trim();
-    }
-
     public String getDisplayurl() {
         return displayurl;
     }
 
     public void setDisplayurl(String displayurl) {
         this.displayurl = displayurl == null ? null : displayurl.trim();
-    }
-
-    public Boolean getLoginstatus() {
-        return loginstatus;
-    }
-
-    public void setLoginstatus(Boolean loginstatus) {
-        this.loginstatus = loginstatus;
-    }
-
-    public Boolean getIsleave() {
-        return isleave;
-    }
-
-    public void setIsleave(Boolean isleave) {
-        this.isleave = isleave;
     }
 
     public byte[] getBg() {

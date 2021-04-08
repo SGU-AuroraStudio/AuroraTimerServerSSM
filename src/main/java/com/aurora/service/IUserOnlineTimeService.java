@@ -3,6 +3,7 @@ package com.aurora.service;
 import com.aurora.domain.UserOnlineTime;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -23,14 +24,14 @@ public interface IUserOnlineTimeService {
      * @return 返回第前x周的数据的集合
      * @throws Exception
      */
-    public Set<UserOnlineTime> lastXWeekData(int x);
+    public List<UserOnlineTime> lastXWeekData(int x);
 
     /**
      * 返回今天米那桑的情况
      * @return 啊啊啊啊啊啊啊哈哈哈哈哈哈哈呵呵呵呵
      * @throws Exception
      */
-    public Set<UserOnlineTime> todayData();
+    public List<UserOnlineTime> todayData();
 
     /**
      * 查找by id。
@@ -38,7 +39,7 @@ public interface IUserOnlineTimeService {
      * @return 呵呵。。。。
      * @throws Exception
      */
-    public UserOnlineTime searchByUnique(String id, Date date);
+    public UserOnlineTime searchByIdAndDate(String id, Date date);
 
     /**
      * 查询本学期计时用，需要传入本学期第一天的日期
@@ -46,5 +47,5 @@ public interface IUserOnlineTimeService {
      * @return 阿巴阿巴
      * @throws Exception
      */
-    public Set<UserOnlineTime> searchByFromDate2Today(Date dateStart);
+    public List<UserOnlineTime> searchByFromDate2Today(Date dateStart);
 }

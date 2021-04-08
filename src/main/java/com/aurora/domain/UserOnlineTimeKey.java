@@ -5,11 +5,11 @@ import java.util.Date;
 public class UserOnlineTimeKey {
     private String id;
 
-    private Date todaydate;
+    private Date todayDate;
 
-    public UserOnlineTimeKey(String id, Date todaydate) {
+    public UserOnlineTimeKey(String id, Date todayDate) {
         this.id = id;
-        this.todaydate = todaydate;
+        this.todayDate = todayDate;
     }
 
     public UserOnlineTimeKey() {
@@ -24,11 +24,11 @@ public class UserOnlineTimeKey {
         this.id = id == null ? null : id.trim();
     }
 
-    public Date getTodaydate() {
-        return todaydate;
+    public Date getTodayDate() {
+        return todayDate;
     }
 
-    public void setTodaydate(Date todaydate) {
-        this.todaydate = todaydate;
+    public void setTodayDate(Date todayDate) {
+        this.todayDate = todayDate;
     }
 }

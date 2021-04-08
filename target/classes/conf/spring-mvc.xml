@@ -26,4 +26,12 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
+    <!--配置拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/timer"/>
+            <bean class="com.aurora.interceptor.TimerInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
 </beans>

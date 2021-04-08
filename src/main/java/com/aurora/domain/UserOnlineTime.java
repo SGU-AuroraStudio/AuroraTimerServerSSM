@@ -7,8 +7,8 @@ public class UserOnlineTime extends UserOnlineTimeKey {
 
     private Date lastOnlineTime;
 
-    public UserOnlineTime(String id, Date todaydate, Long todayOnlineTime, Date lastOnlineTime) {
-        super(id, todaydate);
+    public UserOnlineTime(String id, Date todayDate, Long todayOnlineTime, Date lastOnlineTime) {
+        super(id, todayDate);
         this.todayOnlineTime = todayOnlineTime;
         this.lastOnlineTime = lastOnlineTime;
     }

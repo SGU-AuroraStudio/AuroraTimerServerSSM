@@ -52,18 +52,20 @@
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
         <!-- tableName是数据库中的表名，domainObjectName是生成的JAVA模型名，后面的参数不用改，要生成更多的表就在下面继续加table标签 -->
-        <table tableName="userdata" domainObjectName="UserData"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="true"
-               selectByExampleQueryId="false"/>
-        <table tableName="useronlinetime" domainObjectName="UserOnlineTime"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="true"
-               selectByExampleQueryId="false"/>
-        <table tableName="admindata" domainObjectName="AdminData"
-               enableCountByExample="false" enableUpdateByExample="false"
-               enableDeleteByExample="false" enableSelectByExample="true"
-               selectByExampleQueryId="false"/>
+        <!--<table tableName="userdata" domainObjectName="UserData"-->
+        <!--       enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--       enableDeleteByExample="false" enableSelectByExample="true"-->
+        <!--       selectByExampleQueryId="false"/>-->
+        <!--<table tableName="useronlinetime" domainObjectName="UserOnlineTime"-->
+        <!--       enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--       enableDeleteByExample="false" enableSelectByExample="true"-->
+        <!--       selectByExampleQueryId="false">-->
+        <!--    <columnOverride column="todayonlinetime" javaType="java.lang.Long" jdbcType="BIGINT"/>-->
+        <!--</table>-->
+        <!--<table tableName="admindata" domainObjectName="AdminData"-->
+        <!--       enableCountByExample="false" enableUpdateByExample="false"-->
+        <!--       enableDeleteByExample="false" enableSelectByExample="true"-->
+        <!--       selectByExampleQueryId="false"/>-->
 
     </context>
 </generatorConfiguration>
