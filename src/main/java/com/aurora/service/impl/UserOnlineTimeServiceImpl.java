@@ -7,8 +7,10 @@ import com.aurora.service.IUserOnlineTimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
 import java.sql.Time;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @Author Yao
@@ -22,7 +24,7 @@ public class UserOnlineTimeServiceImpl implements IUserOnlineTimeService {
 
     @Override
     public boolean addTime(String id) {
-        if(id==null||id.isEmpty()) return false;
+        if (id == null || id.isEmpty()) return false;
         long intervalTime = 15 * 60 * 1000; //间隔判断时间，大于这个时间的提交都算重新上线
         Date dateNow = new Date();
         //时间，HH-mm-ss，用于计算上线时间间隔
@@ -37,18 +39,18 @@ public class UserOnlineTimeServiceImpl implements IUserOnlineTimeService {
 
         UserOnlineTime vo;
         //今日第一次上线
-        if(list.size()==0){
-            vo=new UserOnlineTime(id, dateNow, 0l, new Date());
-            return userOnlineTimeMapper.insert(vo)>0;
-        }else {//不是第一次上线
+        if (list.size() == 0) {
+            vo = new UserOnlineTime(id, dateNow, 0l, new Date());
+            return userOnlineTimeMapper.insert(vo) > 0;
+        } else {//不是第一次上线
             vo = list.get(0);
             //正常情况，两次请求在设定间隔时间内
-            if ((timeNow.getTime() - vo.getLastOnlineTime().getTime()) < intervalTime){
-                UserOnlineTime voUpdate = new UserOnlineTime(id, dateNow, timeNow.getTime()-vo.getLastOnlineTime().getTime(), dateNow);
-                return userOnlineTimeMapper.updateByPrimaryKeySelective(voUpdate)>0;
-            }else{//两次请求间隔过长，上线后又下线很久
+            if ((timeNow.getTime() - vo.getLastOnlineTime().getTime()) < intervalTime) {
+                UserOnlineTime voUpdate = new UserOnlineTime(id, dateNow, timeNow.getTime() - vo.getLastOnlineTime().getTime(), dateNow);
+                return userOnlineTimeMapper.updateByPrimaryKeySelective(voUpdate) > 0;
+            } else {//两次请求间隔过长，上线后又下线很久
                 UserOnlineTime voUpdate = new UserOnlineTime(id, dateNow, timeNow.getTime(), vo.getLastOnlineTime());
-                return userOnlineTimeMapper.updateByPrimaryKeySelective(voUpdate)>0;
+                return userOnlineTimeMapper.updateByPrimaryKeySelective(voUpdate) > 0;
             }
         }
     }
@@ -61,19 +63,19 @@ public class UserOnlineTimeServiceImpl implements IUserOnlineTimeService {
         //x*7天前的日期
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dateNow);
-        int dayOfWeekNow = calendar.get(Calendar.DAY_OF_WEEK)-1;
+        int dayOfWeekNow = calendar.get(Calendar.DAY_OF_WEEK) - 1;
         //这周开头，即周日
         calendar.add(Calendar.DATE, -dayOfWeekNow);
         //设置查询条件，计算查询日期
         //查询本周，查询这周开头即周日到今天的记录
-        if(x==0){
+        if (x == 0) {
             criteria.andTodayDateBetween(calendar.getTime(), dateNow);
-        }else {
+        } else {
             //这周开头-x*7即为x周前的第一天
-            calendar.add(Calendar.DATE, -x*7);
+            calendar.add(Calendar.DATE, -x * 7);
             Date lastXWeekSunday = calendar.getTime();
             //+7为最后一天
-            calendar.add(Calendar.DATE,7);
+            calendar.add(Calendar.DATE, 7);
             Date lastWeekSaturday = calendar.getTime();
             criteria.andTodayDateBetween(lastXWeekSunday, lastWeekSaturday);
         }
@@ -96,7 +98,7 @@ public class UserOnlineTimeServiceImpl implements IUserOnlineTimeService {
         criteria.andIdEqualTo(id);
         criteria.andTodayDateEqualTo(date);
         List<UserOnlineTime> list = userOnlineTimeMapper.selectByExample(example);
-        if(list.size()==0)
+        if (list.size() == 0)
             return null;
         return list.get(0);
     }

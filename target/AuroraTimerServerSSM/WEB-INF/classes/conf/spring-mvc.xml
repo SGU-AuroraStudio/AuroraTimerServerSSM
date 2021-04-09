@@ -33,5 +33,7 @@
             <bean class="com.aurora.interceptor.TimerInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
-
+    
+    <!--不拦截静态资源-->
+    <mvc:resources mapping="/soft/**" location="/soft/"/>
 </beans>

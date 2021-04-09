@@ -7,7 +7,7 @@ import com.aurora.domain.UserData;
  * @Date 2021/4/5 19:33
  * @Description
  */
-public interface IUserDataService {
+public interface IUserService {
     boolean register(UserData userData);
 
     UserData login(UserData userData);

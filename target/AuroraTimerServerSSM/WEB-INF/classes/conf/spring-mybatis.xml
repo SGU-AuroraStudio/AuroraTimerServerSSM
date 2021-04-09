@@ -34,7 +34,7 @@
         <property name="dataSource" ref="datasource"/>
         <property name="mapperLocations" value="classpath:mapper/*.xml"/>
     </bean>
-    <!--扫描dao包加入到ioc容器中-->
+    <!--扫描mapper加入到ioc容器中-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.aurora.mapper"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>

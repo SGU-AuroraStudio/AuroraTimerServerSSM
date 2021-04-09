@@ -1,8 +1,8 @@
 package com.aurora.controller;
 
 import com.aurora.domain.UserOnlineTime;
-import com.aurora.service.impl.UserDataServiceImpl;
 import com.aurora.service.impl.UserOnlineTimeServiceImpl;
+import com.aurora.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +21,7 @@ public class UserOnlineTimeController {
     @Autowired
     UserOnlineTimeServiceImpl userOnlineTimeService;
     @Autowired
-    UserDataServiceImpl userDataService;
+    UserServiceImpl userDataService;
 
     @RequestMapping("/timer")
     @ResponseBody

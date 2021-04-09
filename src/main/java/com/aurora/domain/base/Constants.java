@@ -7,4 +7,5 @@ package com.aurora.domain.base;
  */
 public class Constants {
     public static final String SESSION_USER = "user";
+    public static final String[] ADMIN_IDS = {"18125061059",};
 }
