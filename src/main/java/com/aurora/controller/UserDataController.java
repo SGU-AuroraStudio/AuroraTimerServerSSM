@@ -40,10 +40,11 @@ public class UserDataController {
 
     @PostMapping("/login")
     @ResponseBody
-    public String login(HttpServletRequest request, @RequestBody UserData userData) { //前台用json穿参数的话，要用RequestBody
+    public String login(HttpServletRequest request, UserData userData) { //前台用json穿参数的话，要用RequestBody
         UserData user = userDataService.login(new UserData(userData.getId(), userData.getPassword()));
         if (user != null) {
-            request.setAttribute(Constants.SESSION_USER, user);
+            request.getSession().setAttribute(Constants.SESSION_ID, request.getSession().getId());
+            request.getSession().setAttribute(Constants.SESSION_USER, user);
             return "true";
         } else {
             if (userDataService.selectById(userData.getId()) == null)

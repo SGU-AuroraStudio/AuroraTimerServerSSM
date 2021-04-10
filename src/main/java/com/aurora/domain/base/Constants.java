@@ -6,6 +6,7 @@ package com.aurora.domain.base;
  * @Description
  */
 public class Constants {
+    public static final String SESSION_ID = "sessionId";
     public static final String SESSION_USER = "user";
     public static final String[] ADMIN_IDS = {"18125061059",};
 }

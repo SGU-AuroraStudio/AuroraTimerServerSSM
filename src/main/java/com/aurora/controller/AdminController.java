@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,21 +32,22 @@ public class AdminController {
 
     @PostMapping("/admin")
     @ResponseBody
-    public boolean doPost(String id, String password, String announcement, String dutyList, String freeTimeStart, String freeTimeEnd) throws ParseException {
+    public boolean doPost(HttpServletRequest request, String announcement, String dutyList, String freeTimeStart, String freeTimeEnd) throws ParseException {
         //TODO:改成会话的方式检查权限
+        //TODO:很多功能都可以改成会话方式获取
         //检查该id是不是管理员
         boolean isAdmin = false;
+        //从会话里获取登录者
+        UserData userData = (UserData) request.getSession().getAttribute(Constants.SESSION_USER);
+        if(userData==null)
+            return false;
+        String id = userData.getId();
         for (String adminId : Constants.ADMIN_IDS)
             if (adminId.equals(id)) {
                 isAdmin = true;
                 break;
             }
         if (!isAdmin)
-            return false;
-
-        //检查账号密码是否正确
-        UserData checkUser = userService.login(new UserData(id, password));
-        if (checkUser == null)
             return false;
         //准备插入数据
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss"); //（SimpleDateFormat永远滴神！！！）
