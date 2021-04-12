@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * @Author Yao
  * @Date 2021/4/5 16:03
- * @Description
+ * @Description mybatisGenerator，生成代码用的，根据数据库自动生成domain，dao，xxx.xml。在generatorConfig.xml里配置生成规则。
  */
 public class MBG {
 

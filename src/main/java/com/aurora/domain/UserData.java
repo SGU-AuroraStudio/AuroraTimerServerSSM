@@ -9,14 +9,14 @@ public class UserData {
 
     private String displayurl;
 
-    private byte[] bg;
+    private String bgurl;
 
-    public UserData(String id, String nickname, String password, String displayurl, byte[] bg) {
+    public UserData(String id, String nickname, String password, String displayurl, String bgurl) {
         this.id = id;
         this.nickname = nickname;
         this.password = password;
         this.displayurl = displayurl;
-        this.bg = bg;
+        this.bgurl = bgurl;
     }
 
     public UserData(String id, String password) {
@@ -25,7 +25,6 @@ public class UserData {
     }
 
     public UserData() {
-        super();
     }
 
     public String getId() {
@@ -60,11 +59,11 @@ public class UserData {
         this.displayurl = displayurl == null ? null : displayurl.trim();
     }
 
-    public byte[] getBg() {
-        return bg;
+    public String getBgurl() {
+        return bgurl;
     }
 
-    public void setBg(byte[] bg) {
-        this.bg = bg;
+    public void setBgurl(String bgurl) {
+        this.bgurl = bgurl == null ? null : bgurl.trim();
     }
 }

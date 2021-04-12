@@ -36,7 +36,7 @@ public class UserServiceImpl implements IUserService {
         UserDataExample.Criteria criteria = example.createCriteria();
         criteria.andIdEqualTo(userData.getId());
         criteria.andPasswordEqualTo(userData.getPassword());
-        List<UserData> list = userDataMapper.selectByExampleWithBLOBs(example);
+        List<UserData> list = userDataMapper.selectByExample(example);
         if (list.size() > 0)
             return list.get(0);
         else
@@ -44,8 +44,8 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public boolean updateBgById(UserData userData) {
-        return false;
+    public boolean updateByIdSelective(UserData userData) {
+        return userDataMapper.updateByPrimaryKeySelective(userData) > 0;
     }
 
     @Override

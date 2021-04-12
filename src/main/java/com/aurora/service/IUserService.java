@@ -12,7 +12,7 @@ public interface IUserService {
 
     UserData login(UserData userData);
 
-    boolean updateBgById(UserData userData);
+    boolean updateByIdSelective(UserData userData);
 
     UserData selectById(String id);
 }

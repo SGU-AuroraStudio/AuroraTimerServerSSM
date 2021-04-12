@@ -30,10 +30,18 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/timer"/>
+            <mvc:mapping path="/bg"/>
             <bean class="com.aurora.interceptor.TimerInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
     
     <!--不拦截静态资源-->
     <mvc:resources mapping="/soft/**" location="/soft/"/>
+    <mvc:resources mapping="/pages/**" location="/pages/"/>
+
+    <!--multipart/form-data解析器-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--设置上传文件最大尺寸，单位为B-->
+        <property name="maxUploadSizePerFile" value="10240000"/>
+    </bean>
 </beans>

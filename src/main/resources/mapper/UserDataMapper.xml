@@ -7,15 +7,7 @@
       <arg column="nickname" javaType="java.lang.String" jdbcType="CHAR" />
       <arg column="password" javaType="java.lang.String" jdbcType="CHAR" />
       <arg column="displayurl" javaType="java.lang.String" jdbcType="CHAR" />
-    </constructor>
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.aurora.domain.UserData">
-    <constructor>
-      <idArg column="id" javaType="java.lang.String" jdbcType="CHAR" />
-      <arg column="nickname" javaType="java.lang.String" jdbcType="CHAR" />
-      <arg column="password" javaType="java.lang.String" jdbcType="CHAR" />
-      <arg column="displayurl" javaType="java.lang.String" jdbcType="CHAR" />
-      <arg column="bg" javaType="_byte[]" jdbcType="LONGVARBINARY" />
+      <arg column="bgUrl" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -48,28 +40,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, nickname, password, displayurl
+    id, nickname, password, displayurl, bgUrl
   </sql>
-  <sql id="Blob_Column_List">
-    bg
-  </sql>
-  <select id="selectByExampleWithBLOBs" parameterType="com.aurora.domain.UserDataExample" resultMap="ResultMapWithBLOBs">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    'false' as QUERYID,
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from userdata
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByExample" parameterType="com.aurora.domain.UserDataExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
@@ -85,11 +57,9 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
     from userdata
     where id = #{id,jdbcType=CHAR}
   </select>
@@ -99,9 +69,9 @@
   </delete>
   <insert id="insert" parameterType="com.aurora.domain.UserData">
     insert into userdata (id, nickname, password, 
-      displayurl, bg)
+      displayurl, bgUrl)
     values (#{id,jdbcType=CHAR}, #{nickname,jdbcType=CHAR}, #{password,jdbcType=CHAR}, 
-      #{displayurl,jdbcType=CHAR}, #{bg,jdbcType=LONGVARBINARY})
+      #{displayurl,jdbcType=CHAR}, #{bgurl,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.aurora.domain.UserData">
     insert into userdata
@@ -118,8 +88,8 @@
       <if test="displayurl != null">
         displayurl,
       </if>
-      <if test="bg != null">
-        bg,
+      <if test="bgurl != null">
+        bgUrl,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -135,8 +105,8 @@
       <if test="displayurl != null">
         #{displayurl,jdbcType=CHAR},
       </if>
-      <if test="bg != null">
-        #{bg,jdbcType=LONGVARBINARY},
+      <if test="bgurl != null">
+        #{bgurl,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -152,25 +122,18 @@
       <if test="displayurl != null">
         displayurl = #{displayurl,jdbcType=CHAR},
       </if>
-      <if test="bg != null">
-        bg = #{bg,jdbcType=LONGVARBINARY},
+      <if test="bgurl != null">
+        bgUrl = #{bgurl,jdbcType=VARCHAR},
       </if>
     </set>
-    where id = #{id,jdbcType=CHAR}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.aurora.domain.UserData">
-    update userdata
-    set nickname = #{nickname,jdbcType=CHAR},
-      password = #{password,jdbcType=CHAR},
-      displayurl = #{displayurl,jdbcType=CHAR},
-      bg = #{bg,jdbcType=LONGVARBINARY}
     where id = #{id,jdbcType=CHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.aurora.domain.UserData">
     update userdata
     set nickname = #{nickname,jdbcType=CHAR},
       password = #{password,jdbcType=CHAR},
-      displayurl = #{displayurl,jdbcType=CHAR}
+      displayurl = #{displayurl,jdbcType=CHAR},
+      bgUrl = #{bgurl,jdbcType=VARCHAR}
     where id = #{id,jdbcType=CHAR}
   </update>
 </mapper>

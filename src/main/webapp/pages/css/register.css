@@ -1,0 +1,27 @@
+/*input{   
+    border: 1px solid rgb(216, 216, 216);  
+    padding: 2px 10px 2px 10px;  
+}  */
+
+.init {
+	background: #F5F5F5;
+	font-weight: bold;
+	margin: 15px;
+	color: #000000;
+}
+
+.wrong {
+	background: #F5F5F5;
+	font-weight: bold;
+	margin: 15px;
+	border: 1px #DD0000 solid;
+	color: #000000;
+}
+
+.right {
+	background: #F5F5F5;
+	font-weight: bold;
+	margin: 15px;
+	border: 1px #00DD00 solid;
+	color: #000000;
+}

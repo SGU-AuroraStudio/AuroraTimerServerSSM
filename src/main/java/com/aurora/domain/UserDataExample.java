@@ -383,6 +383,76 @@ public class UserDataExample {
             addCriterion("displayurl not between", value1, value2, "displayurl");
             return (Criteria) this;
         }
+
+        public Criteria andBgurlIsNull() {
+            addCriterion("bgUrl is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBgurlIsNotNull() {
+            addCriterion("bgUrl is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBgurlEqualTo(String value) {
+            addCriterion("bgUrl =", value, "bgurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andBgurlNotEqualTo(String value) {
+            addCriterion("bgUrl <>", value, "bgurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andBgurlGreaterThan(String value) {
+            addCriterion("bgUrl >", value, "bgurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andBgurlGreaterThanOrEqualTo(String value) {
+            addCriterion("bgUrl >=", value, "bgurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andBgurlLessThan(String value) {
+            addCriterion("bgUrl <", value, "bgurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andBgurlLessThanOrEqualTo(String value) {
+            addCriterion("bgUrl <=", value, "bgurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andBgurlLike(String value) {
+            addCriterion("bgUrl like", value, "bgurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andBgurlNotLike(String value) {
+            addCriterion("bgUrl not like", value, "bgurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andBgurlIn(List<String> values) {
+            addCriterion("bgUrl in", values, "bgurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andBgurlNotIn(List<String> values) {
+            addCriterion("bgUrl not in", values, "bgurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andBgurlBetween(String value1, String value2) {
+            addCriterion("bgUrl between", value1, value2, "bgurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andBgurlNotBetween(String value1, String value2) {
+            addCriterion("bgUrl not between", value1, value2, "bgurl");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

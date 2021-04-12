@@ -33,7 +33,7 @@ public class UserOnlineTimeController {
 
     @RequestMapping("/lastXWeek")
     @ResponseBody
-    public Map<String, Object> timer(@RequestParam Integer x) {
+    public Map<String, Object> lastXWeek(@RequestParam Integer x) {
         //Map的key为id
         Map<String, Object> map = new HashMap<>();
         Map<String, Long> weekTimeMap = new HashMap<>();
