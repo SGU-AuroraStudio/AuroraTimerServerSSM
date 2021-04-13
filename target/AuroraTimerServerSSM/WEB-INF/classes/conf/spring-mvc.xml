@@ -28,7 +28,9 @@
 
     <!--配置拦截器-->
     <mvc:interceptors>
+        <!--登录检测功能-->
         <mvc:interceptor>
+            <!--只检测计时和背景图功能-->
             <mvc:mapping path="/timer"/>
             <mvc:mapping path="/bg"/>
             <bean class="com.aurora.interceptor.TimerInterceptor"/>

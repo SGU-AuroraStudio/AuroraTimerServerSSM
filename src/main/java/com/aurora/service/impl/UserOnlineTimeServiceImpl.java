@@ -22,6 +22,7 @@ public class UserOnlineTimeServiceImpl implements IUserOnlineTimeService {
     @Autowired
     UserOnlineTimeMapper userOnlineTimeMapper;
 
+    //TODO:测试一段时间后计时
     @Override
     public boolean addTime(String id) {
         if (id == null || id.isEmpty()) return false;

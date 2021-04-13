@@ -16,6 +16,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @Author Yao
@@ -68,7 +69,6 @@ public class UserDataController {
         }
     }
 
-    //TODO:findById，感觉这个好像不用
     @RequestMapping("/findById")
     @ResponseBody
     public Map<String, Object> findById(String id) {
@@ -117,20 +117,28 @@ public class UserDataController {
         HttpSession session = request.getSession();
         UserData userData = (UserData) session.getAttribute(Constants.SESSION_USER);
         //获取图片后缀组成图片名称 如：id_bg.jpg
-        String[] split = file.getOriginalFilename().split("\\.");
-        String fileName = userData.getId() + "_bg." + split[split.length - 1];
-        //保存到文件系统
-        File fileToSave = new File(Constants.LOCAL_BG_BASE_PATH, fileName);
-        file.transferTo(fileToSave);
+        String fileName = file.getOriginalFilename();
+        //保存到文件系统。如果是默认的3个背景图，就不保存了
+        File fileToSave = null;
+        if(!file.getOriginalFilename().contains("AuroraTimer_bg")) {
+            fileName = userData.getId() + "_bg"+ UUID.randomUUID().toString().substring(24) +"." + fileName.substring(fileName.lastIndexOf("."));
+            fileToSave = new File(Constants.LOCAL_BG_BASE_PATH, fileName);
+            file.transferTo(fileToSave);
+        }
+        File oldBg = new File(Constants.LOCAL_BG_BASE_PATH, userData.getBgurl().substring(userData.getBgurl().lastIndexOf("/")));
         //设置新路径准备更新到数据库
         userData.setBgurl(Constants.SERVER_BASE_HTTP_URL + "/bg/" + fileName);
         //上传到数据库
         if (userDataService.updateByIdSelective(userData)) {
+            //删除旧版图片，前提是旧图片不是默认
+            if(oldBg.exists() && !oldBg.getName().contains("AuroraTimer_bg"))
+                oldBg.delete();
             //更新session里的user
             session.setAttribute(Constants.SESSION_USER, userData);
             return true;
         } else {
-            fileToSave.delete();
+            if(fileToSave!=null && fileToSave.exists())
+                fileToSave.delete();
             return false;
         }
     }
