@@ -48,7 +48,7 @@
     </if>
     'false' as QUERYID,
     <include refid="Base_Column_List" />
-    from useronlinetime
+    from UserOnlineTime
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -59,23 +59,23 @@
   <select id="selectByPrimaryKey" parameterType="com.aurora.domain.UserOnlineTimeKey" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from useronlinetime
+    from UserOnlineTime
     where id = #{id,jdbcType=CHAR}
       and today_date = #{todayDate,jdbcType=DATE}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="com.aurora.domain.UserOnlineTimeKey">
-    delete from useronlinetime
+    delete from UserOnlineTime
     where id = #{id,jdbcType=CHAR}
       and today_date = #{todayDate,jdbcType=DATE}
   </delete>
   <insert id="insert" parameterType="com.aurora.domain.UserOnlineTime">
-    insert into useronlinetime (id, today_date, today_online_time, 
+    insert into UserOnlineTime (id, today_date, today_online_time,
       last_online_time)
     values (#{id,jdbcType=CHAR}, #{todayDate,jdbcType=DATE}, #{todayOnlineTime,jdbcType=BIGINT}, 
       #{lastOnlineTime,jdbcType=TIME})
   </insert>
   <insert id="insertSelective" parameterType="com.aurora.domain.UserOnlineTime">
-    insert into useronlinetime
+    insert into UserOnlineTime
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -106,7 +106,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.aurora.domain.UserOnlineTime">
-    update useronlinetime
+    update UserOnlineTime
     <set>
       <if test="todayOnlineTime != null">
         today_online_time = #{todayOnlineTime,jdbcType=BIGINT},
@@ -119,7 +119,7 @@
       and today_date = #{todayDate,jdbcType=DATE}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.aurora.domain.UserOnlineTime">
-    update useronlinetime
+    update UserOnlineTime
     set today_online_time = #{todayOnlineTime,jdbcType=BIGINT},
       last_online_time = #{lastOnlineTime,jdbcType=TIME}
     where id = #{id,jdbcType=CHAR}

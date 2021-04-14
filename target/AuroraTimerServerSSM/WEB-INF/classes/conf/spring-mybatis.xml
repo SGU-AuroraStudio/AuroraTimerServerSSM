@@ -15,9 +15,6 @@
     <context:component-scan base-package="com.aurora.service"/>
 
     <context:property-placeholder location="classpath:conf/database.properties" ignore-unresolvable="true"/>
-
-    <mvc:annotation-driven/>
-
     <!--连接池-->
     <bean id="datasource" class="com.alibaba.druid.pool.DruidDataSource">
         <property name="driverClassName" value="${jdbc.driver}"/>

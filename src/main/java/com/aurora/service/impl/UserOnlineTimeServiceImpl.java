@@ -35,22 +35,23 @@ public class UserOnlineTimeServiceImpl implements IUserOnlineTimeService {
         UserOnlineTimeExample example = new UserOnlineTimeExample();
         UserOnlineTimeExample.Criteria criteria = example.createCriteria();
         criteria.andIdEqualTo(id);
-        criteria.andTodayDateEqualTo(new java.util.Date());
+        criteria.andTodayDateEqualTo(dateNow);
         List<UserOnlineTime> list = userOnlineTimeMapper.selectByExample(example);
 
         UserOnlineTime vo;
         //今日第一次上线
         if (list.size() == 0) {
-            vo = new UserOnlineTime(id, dateNow, 0l, new Date());
+            vo = new UserOnlineTime(id, dateNow, 0l, dateNow);
             return userOnlineTimeMapper.insert(vo) > 0;
         } else {//不是第一次上线
             vo = list.get(0);
+            Time lastOnlineTime = new Time(vo.getLastOnlineTime().getTime());
             //正常情况，两次请求在设定间隔时间内
-            if ((timeNow.getTime() - vo.getLastOnlineTime().getTime()) < intervalTime) {
-                UserOnlineTime voUpdate = new UserOnlineTime(id, dateNow, timeNow.getTime() - vo.getLastOnlineTime().getTime(), dateNow);
+            if ((timeNow.getTime() - lastOnlineTime.getTime()) < intervalTime) {
+                UserOnlineTime voUpdate = new UserOnlineTime(id, dateNow, vo.getTodayOnlineTime() + (timeNow.getTime() - lastOnlineTime.getTime()), dateNow);
                 return userOnlineTimeMapper.updateByPrimaryKeySelective(voUpdate) > 0;
             } else {//两次请求间隔过长，上线后又下线很久
-                UserOnlineTime voUpdate = new UserOnlineTime(id, dateNow, timeNow.getTime(), vo.getLastOnlineTime());
+                UserOnlineTime voUpdate = new UserOnlineTime(id, dateNow, timeNow.getTime(), dateNow);
                 return userOnlineTimeMapper.updateByPrimaryKeySelective(voUpdate) > 0;
             }
         }

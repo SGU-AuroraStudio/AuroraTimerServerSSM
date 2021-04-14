@@ -33,7 +33,6 @@ public class AdminController {
     @PostMapping("/admin")
     @ResponseBody
     public boolean doPost(HttpServletRequest request, String announcement, String dutyList, String freeTimeStart, String freeTimeEnd) throws ParseException {
-        //TODO:改成会话的方式检查权限
         //TODO:很多功能都可以改成会话方式获取
         //检查该id是不是管理员
         boolean isAdmin = false;

@@ -49,7 +49,7 @@
     </if>
     'false' as QUERYID,
     <include refid="Base_Column_List" />
-    from admindata
+    from AdminData
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -60,21 +60,21 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from admindata
+    from AdminData
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from admindata
+    delete from AdminData
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.aurora.domain.AdminData">
-    insert into admindata (id, announcement, dutyList, 
+    insert into AdminData (id, announcement, dutyList,
       freeTimeStart, freeTimeEnd)
     values (#{id,jdbcType=INTEGER}, #{announcement,jdbcType=VARCHAR}, #{dutylist,jdbcType=VARCHAR}, 
       #{freetimestart,jdbcType=TIME}, #{freetimeend,jdbcType=TIME})
   </insert>
   <insert id="insertSelective" parameterType="com.aurora.domain.AdminData">
-    insert into admindata
+    insert into AdminData
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -111,7 +111,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.aurora.domain.AdminData">
-    update admindata
+    update AdminData
     <set>
       <if test="announcement != null">
         announcement = #{announcement,jdbcType=VARCHAR},
@@ -129,7 +129,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.aurora.domain.AdminData">
-    update admindata
+    update AdminData
     set announcement = #{announcement,jdbcType=VARCHAR},
       dutyList = #{dutylist,jdbcType=VARCHAR},
       freeTimeStart = #{freetimestart,jdbcType=TIME},

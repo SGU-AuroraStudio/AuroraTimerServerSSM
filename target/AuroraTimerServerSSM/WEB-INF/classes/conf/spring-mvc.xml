@@ -10,8 +10,9 @@
 
     <context:component-scan base-package="com.aurora.controller"/>
 
-    <!--设置ResponseBody支持的类型-->
+    <!--注解驱动，以使得访问路径与方法的匹配可以通过注解配置-->
     <mvc:annotation-driven>
+        <!--设置ResponseBody支持的类型-->
         <mvc:message-converters>
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
                 <property name="supportedMediaTypes">
@@ -38,7 +39,6 @@
     </mvc:interceptors>
     
     <!--不拦截静态资源-->
-    <mvc:resources mapping="/soft/**" location="/soft/"/>
     <mvc:resources mapping="/pages/**" location="/pages/"/>
 
     <!--multipart/form-data解析器-->

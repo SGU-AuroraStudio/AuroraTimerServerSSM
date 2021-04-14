@@ -28,6 +28,7 @@ public class UserOnlineTimeController {
     public String timer(@RequestParam String id) {
         if (userDataService.selectById(id) == null)
             return "用户不存在";
+        //在service层里进行各种判断
         return String.valueOf(userOnlineTimeService.addTime(id));
     }
 
@@ -86,7 +87,7 @@ public class UserOnlineTimeController {
             //在map里存map
             Map<String, Object> each = new HashMap<>();
             each.put("id", id);
-            each.put("name", userDataService.selectById(id).getNickname() + "_");
+            each.put("name", userDataService.selectById(id).getNickname());
             each.put("time", weekTimeMap.get(id) == null ? 0 : weekTimeMap.get(id));
             each.put("termTime", termTimeMap.get(id));
             map.put(id, each);

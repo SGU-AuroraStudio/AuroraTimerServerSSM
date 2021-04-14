@@ -49,7 +49,7 @@
     </if>
     'false' as QUERYID,
     <include refid="Base_Column_List" />
-    from userdata
+    from UserData
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -60,21 +60,21 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from userdata
+    from UserData
     where id = #{id,jdbcType=CHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from userdata
+    delete from UserData
     where id = #{id,jdbcType=CHAR}
   </delete>
   <insert id="insert" parameterType="com.aurora.domain.UserData">
-    insert into userdata (id, nickname, password, 
+    insert into UserData (id, nickname, password,
       displayurl, bgUrl)
     values (#{id,jdbcType=CHAR}, #{nickname,jdbcType=CHAR}, #{password,jdbcType=CHAR}, 
       #{displayurl,jdbcType=CHAR}, #{bgurl,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.aurora.domain.UserData">
-    insert into userdata
+    insert into UserData
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -111,7 +111,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.aurora.domain.UserData">
-    update userdata
+    update UserData
     <set>
       <if test="nickname != null">
         nickname = #{nickname,jdbcType=CHAR},
@@ -129,7 +129,7 @@
     where id = #{id,jdbcType=CHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.aurora.domain.UserData">
-    update userdata
+    update UserData
     set nickname = #{nickname,jdbcType=CHAR},
       password = #{password,jdbcType=CHAR},
       displayurl = #{displayurl,jdbcType=CHAR},
