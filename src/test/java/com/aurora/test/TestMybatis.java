@@ -1,5 +1,6 @@
 package com.aurora.test;
 
+import com.aurora.mapper.AdminUserMapper;
 import com.aurora.service.impl.UserOnlineTimeServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,9 +18,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class TestMybatis {
     @Autowired
     UserOnlineTimeServiceImpl userOnlineTimeService;
+    @Autowired
+    AdminUserMapper userMapper;
 
     @Test
     public void testLastXWeek() {
         userOnlineTimeService.lastXWeekData(1);
+    }
+
+    @Test
+    public void testAdminUser(){
+        System.out.println(userMapper.selectByUserId("18125061059"));
     }
 }

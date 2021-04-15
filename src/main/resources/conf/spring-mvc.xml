@@ -34,7 +34,12 @@
             <!--只检测计时和背景图功能-->
             <mvc:mapping path="/timer"/>
             <mvc:mapping path="/bg"/>
-            <bean class="com.aurora.interceptor.TimerInterceptor"/>
+            <bean class="com.aurora.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+        <!--全局拦截器，打印客户端信息-->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.aurora.interceptor.CommonInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
     

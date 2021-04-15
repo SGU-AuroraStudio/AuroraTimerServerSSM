@@ -1,6 +1,8 @@
 package com.aurora.controller;
 
+import com.aurora.domain.UserData;
 import com.aurora.domain.UserOnlineTime;
+import com.aurora.domain.base.Constants;
 import com.aurora.service.impl.UserOnlineTimeServiceImpl;
 import com.aurora.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 /**
@@ -25,11 +28,10 @@ public class UserOnlineTimeController {
 
     @RequestMapping("/timer")
     @ResponseBody
-    public String timer(@RequestParam String id) {
-        if (userDataService.selectById(id) == null)
-            return "用户不存在";
+    public String timer(HttpServletRequest request) {
+        UserData user = (UserData) request.getSession().getAttribute(Constants.SESSION_USER);
         //在service层里进行各种判断
-        return String.valueOf(userOnlineTimeService.addTime(id));
+        return String.valueOf(userOnlineTimeService.addTime(user.getId()));
     }
 
     @RequestMapping("/lastXWeek")
@@ -87,7 +89,7 @@ public class UserOnlineTimeController {
             //在map里存map
             Map<String, Object> each = new HashMap<>();
             each.put("id", id);
-            each.put("name", userDataService.selectById(id).getNickname());
+            each.put("name", userDataService.selectById(id).getNickname()); //TODO:每次获取都查询，太烦了。建议在计时表加用户名字段。
             each.put("time", weekTimeMap.get(id) == null ? 0 : weekTimeMap.get(id));
             each.put("termTime", termTimeMap.get(id));
             map.put(id, each);

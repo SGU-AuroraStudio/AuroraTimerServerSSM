@@ -3,6 +3,8 @@ package com.aurora.controller;
 import com.aurora.domain.UserData;
 import com.aurora.domain.base.Constants;
 import com.aurora.service.impl.UserServiceImpl;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +27,7 @@ import java.util.UUID;
  */
 @Controller
 public class UserDataController {
+    private static final Logger logger = LogManager.getLogger(UserDataController.class);
     @Autowired
     UserServiceImpl userDataService;
 
@@ -34,6 +37,8 @@ public class UserDataController {
         //旧版本密码是pwd，新版的password
         if (userData.getId() == null || userData.getPassword() == null)
             return "请检查账号或密码是否输入正确";
+        //不知道为什么要加这个，，，最开始的计时器加的，懒得改
+        userData.setNickname(userData.getNickname()+"_");
         //在业务层已经进行id重复检测了
         if (userDataService.register(userData)) {
             request.setAttribute(Constants.SESSION_USER, userData);
@@ -58,14 +63,19 @@ public class UserDataController {
     public String login(HttpServletRequest request, UserData userData) { //前台用json穿参数的话，要用RequestBody
         UserData user = userDataService.login(new UserData(userData.getId(), userData.getPassword()));
         if (user != null) {
+            logger.info("登录成功，ID: " + user.getId() + "  Nickname: " + user.getNickname());
             request.getSession().setAttribute(Constants.SESSION_ID, request.getSession().getId());
             request.getSession().setAttribute(Constants.SESSION_USER, user);
             return "true";
         } else {
-            if (userDataService.selectById(userData.getId()) == null)
+            if (userDataService.selectById(userData.getId()) == null) {
+                logger.info("账号不存在，ID：" + userData.getId());
                 return "账号不存在";
-            else
+            }
+            else {
+                logger.info("密码错误");
                 return "密码错误";
+            }
         }
     }
 
@@ -120,8 +130,8 @@ public class UserDataController {
         String fileName = file.getOriginalFilename();
         //保存到文件系统。如果是默认的3个背景图，就不保存了
         File fileToSave = null;
-        if(!file.getOriginalFilename().contains("AuroraTimer_bg")) {
-            fileName = userData.getId() + "_bg"+ UUID.randomUUID().toString().substring(24) +"." + fileName.substring(fileName.lastIndexOf("."));
+        if (!file.getOriginalFilename().contains("AuroraTimer_bg")) {
+            fileName = userData.getId() + "_bg" + UUID.randomUUID().toString().substring(24) + "." + fileName.substring(fileName.lastIndexOf("."));
             fileToSave = new File(Constants.LOCAL_BG_BASE_PATH, fileName);
             file.transferTo(fileToSave);
         }
@@ -130,14 +140,17 @@ public class UserDataController {
         userData.setBgurl(Constants.SERVER_BASE_HTTP_URL + "/bg/" + fileName);
         //上传到数据库
         if (userDataService.updateByIdSelective(userData)) {
+            logger.info("上传背景图");
+            logger.info("背景图原始名" + file.getOriginalFilename());
             //删除旧版图片，前提是旧图片不是默认
-            if(oldBg.exists() && !oldBg.getName().contains("AuroraTimer_bg"))
+            if (oldBg.exists() && !oldBg.getName().contains("AuroraTimer_bg"))
                 oldBg.delete();
             //更新session里的user
             session.setAttribute(Constants.SESSION_USER, userData);
             return true;
         } else {
-            if(fileToSave!=null && fileToSave.exists())
+            logger.warn("更新用户背景图URL失败");
+            if (fileToSave != null && fileToSave.exists())
                 fileToSave.delete();
             return false;
         }

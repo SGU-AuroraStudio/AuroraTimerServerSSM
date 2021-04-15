@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aurora.mapper.AdminUserMapper">
+    <select id="selectByUserId" resultType="java.lang.Integer">
+        select count(*) from AdminUser where user_id = #{userId};
+    </select>
+</mapper>

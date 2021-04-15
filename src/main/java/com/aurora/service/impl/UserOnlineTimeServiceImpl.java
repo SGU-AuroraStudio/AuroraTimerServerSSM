@@ -25,7 +25,6 @@ public class UserOnlineTimeServiceImpl implements IUserOnlineTimeService {
     @Autowired
     UserOnlineTimeMapper userOnlineTimeMapper;
 
-    //TODO:测试一段时间后计时
     @Override
     public boolean addTime(String id) {
         if (id == null || id.isEmpty()) return false;
@@ -44,18 +43,20 @@ public class UserOnlineTimeServiceImpl implements IUserOnlineTimeService {
         UserOnlineTime vo;
         //今日第一次上线
         if (list.size() == 0) {
+            logger.info("今天第一次上线");
             vo = new UserOnlineTime(id, dateNow, 0l, dateNow);
             return userOnlineTimeMapper.insert(vo) > 0;
         } else {//不是第一次上线
             vo = list.get(0);
-            logger.debug(vo.getId() + " " + vo.getTodayOnlineTime());
+            logger.info("用户ID: " + vo.getId() + " 今日在线时间: "+ vo.getTodayOnlineTime());
             Time lastOnlineTime = new Time(vo.getLastOnlineTime().getTime());
             //正常情况，两次请求在设定间隔时间内
             if ((timeNow.getTime() - lastOnlineTime.getTime()) < intervalTime) {
-                logger.debug("new online time = " + vo.getTodayOnlineTime() + (timeNow.getTime() - lastOnlineTime.getTime()));
+                logger.info("将要新添加计时 = " + (timeNow.getTime() - lastOnlineTime.getTime()));
                 UserOnlineTime voUpdate = new UserOnlineTime(id, dateNow, vo.getTodayOnlineTime() + (timeNow.getTime() - lastOnlineTime.getTime()), dateNow);
                 return userOnlineTimeMapper.updateByPrimaryKeySelective(voUpdate) > 0;
             } else {//两次请求间隔过长，上线后又下线很久
+                logger.info("今天两次上线间隔大于"+ intervalTime/(60*1000) +"分钟，上次上线时间: " + vo.getLastOnlineTime());
                 UserOnlineTime voUpdate = new UserOnlineTime(id, dateNow, vo.getTodayOnlineTime(), dateNow);
                 return userOnlineTimeMapper.updateByPrimaryKeySelective(voUpdate) > 0;
             }
