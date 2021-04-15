@@ -5,11 +5,11 @@ import com.aurora.domain.UserData;
 import com.aurora.domain.base.Constants;
 import com.aurora.service.impl.AdminServiceImpl;
 import com.aurora.service.impl.UserServiceImpl;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
@@ -29,6 +29,18 @@ public class AdminController {
     UserServiceImpl userService;
     @Autowired
     AdminServiceImpl adminService;
+
+    private static Logger logger = LogManager.getLogger(AdminController.class);
+
+    @RequestMapping("/test")
+    @ResponseBody
+    public String test(){
+        logger.info("测试log4j");
+        logger.debug("测试log4j");
+        logger.warn("测试log4j");
+        logger.error("测试log4j");
+        return "连接成功！";
+    }
 
     @PostMapping("/admin")
     @ResponseBody
