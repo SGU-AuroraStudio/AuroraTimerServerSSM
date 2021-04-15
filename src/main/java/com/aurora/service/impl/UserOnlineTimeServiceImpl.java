@@ -4,6 +4,8 @@ import com.aurora.domain.UserOnlineTime;
 import com.aurora.domain.UserOnlineTimeExample;
 import com.aurora.mapper.UserOnlineTimeMapper;
 import com.aurora.service.IUserOnlineTimeService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,7 @@ import java.util.List;
  */
 @Service
 public class UserOnlineTimeServiceImpl implements IUserOnlineTimeService {
+    private static final Logger logger = LogManager.getLogger(UserOnlineTimeServiceImpl.class);
     @Autowired
     UserOnlineTimeMapper userOnlineTimeMapper;
 
@@ -45,13 +48,15 @@ public class UserOnlineTimeServiceImpl implements IUserOnlineTimeService {
             return userOnlineTimeMapper.insert(vo) > 0;
         } else {//不是第一次上线
             vo = list.get(0);
+            logger.debug(vo.getId() + " " + vo.getTodayOnlineTime());
             Time lastOnlineTime = new Time(vo.getLastOnlineTime().getTime());
             //正常情况，两次请求在设定间隔时间内
             if ((timeNow.getTime() - lastOnlineTime.getTime()) < intervalTime) {
+                logger.debug("new online time = " + vo.getTodayOnlineTime() + (timeNow.getTime() - lastOnlineTime.getTime()));
                 UserOnlineTime voUpdate = new UserOnlineTime(id, dateNow, vo.getTodayOnlineTime() + (timeNow.getTime() - lastOnlineTime.getTime()), dateNow);
                 return userOnlineTimeMapper.updateByPrimaryKeySelective(voUpdate) > 0;
             } else {//两次请求间隔过长，上线后又下线很久
-                UserOnlineTime voUpdate = new UserOnlineTime(id, dateNow, timeNow.getTime(), dateNow);
+                UserOnlineTime voUpdate = new UserOnlineTime(id, dateNow, vo.getTodayOnlineTime(), dateNow);
                 return userOnlineTimeMapper.updateByPrimaryKeySelective(voUpdate) > 0;
             }
         }
