@@ -21,13 +21,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public boolean register(UserData userData) {
-        //先查找要注册的id存不存在
-        UserData checkUser = userDataMapper.selectByPrimaryKey(userData.getId());
-        //不存在就注册
-        if (checkUser == null)
-            return userDataMapper.insert(userData) > 0;
-        else
-            return false;
+        return userDataMapper.insert(userData) > 0;
     }
 
     @Override

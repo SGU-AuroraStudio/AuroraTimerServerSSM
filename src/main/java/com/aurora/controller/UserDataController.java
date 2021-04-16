@@ -39,7 +39,11 @@ public class UserDataController {
             return "请检查账号或密码是否输入正确";
         //不知道为什么要加这个，，，最开始的计时器加的，懒得改
         userData.setNickname(userData.getNickname()+"_");
-        //在业务层已经进行id重复检测了
+        UserData checkUser = userDataService.selectById(userData.getId());
+        //检查用户名是否存在
+        if(checkUser!=null)
+            return "用户已存在";
+        //注册
         if (userDataService.register(userData)) {
             request.setAttribute(Constants.SESSION_USER, userData);
             return "true";

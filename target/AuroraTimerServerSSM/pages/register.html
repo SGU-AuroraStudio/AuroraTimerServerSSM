@@ -1,19 +1,37 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-        <title>计时器注册</title>
-        <link rel="stylesheet" type="text/css" href="css/register.css">
-        <script type="text/javascript" src="js/register.js"></script>
-        <script type="text/javascript" src="js/md5.js"></script>
-    </head>
-    <body>
-    <form name="register" id="register" method="post" action="/timer/register" onsubmit="return checkAll()">
-        姓  名：<input class="init" type="text" name="nickname" id="nickname"><span id="nicknameMsg"></span><br>
-        学  号：<input class="init" type="text" name="id" id="id"><span id="idMsg"></span><br>
-        密  码：<input class="init" type="password" name="password" id="password"><span id="passwordMsg"></span><br>
-        确认密码：<input class="init" type="password" name="conf" id="conf"><span id="confMsg"></span><br>
-        <input type="submit" name="sub" id="sub" value="submit"><br>
-    </form>
-    </body>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>计时器注册</title>
+    <link rel="stylesheet" type="text/css" href="css/register.css">
+    <script type="text/javascript" src="js/register.js"></script>
+    <script type="text/javascript" src="js/md5.js"></script>
+</head>
+<body>
+    <div class="login">
+        <div class="login-top">
+            注册
+        </div>
+        <form name="register" id="register" method="post" action="/timer/register" onsubmit="return checkAll()">
+            <div class="login-center">
+                姓 名：<input class="init" type="text" name="nickname" id="nickname"><span id="nicknameMsg"></span><br>
+            </div>
+            <div class="login-center">
+                学 号：<input class="init" type="text" name="id" id="id"><span id="idMsg"></span><br>
+            </div>
+            <div class="login-center">
+                密 码：<input class="init" type="password" name="password" id="password"><span id="passwordMsg"></span><br>
+            </div>
+            <div style="margin-bottom: 30px">
+                <label for="conf" style="margin-left: 15px">确认密码：</label><input class="init" type="password" name="conf" id="conf"><span id="confMsg"></span><br>
+            </div>
+            <div class="login-center">
+                <div style="margin-left: 10px;">
+                    <input class="login-button" type="submit" name="sub" id="sub" value="注册"><br>
+                </div>
+            </div>
+        </form>
+    </div>
+<script type="text/javascript" src="js/spider.js"></script>
+</body>
 </html>
