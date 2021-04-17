@@ -1,4 +1,4 @@
-// https://blog.csdn.net/qq_43218075/article/details/87372797?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-1&spm=1001.2101.3001.4242
+﻿// https://blog.csdn.net/qq_43218075/article/details/87372797?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-1&spm=1001.2101.3001.4242
 
 //立即执行函数
 //!的作用是告诉javascript引擎这是一个函数表达式，不是函数声明，()、！、+、-等运算符都能实现这个作用，不过()是最安全的
@@ -34,7 +34,7 @@
             z: script.getAttribute("zIndex") || -1,
             opacity: script.getAttribute("opacity") || 1,
             color: script.getAttribute("color") || "0,0,0",
-            count: script.getAttribute("count") || 109
+            count: script.getAttribute("count") || 200
         }
     }
     //获得窗口宽高，并设置canvas元素宽高
