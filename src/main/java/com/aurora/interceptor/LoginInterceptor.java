@@ -1,6 +1,7 @@
 package com.aurora.interceptor;
 
 import com.aurora.domain.base.Constants;
+import com.aurora.util.Util;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @Author Yao
  * @Date 2021/4/8 21:37
- * @Description
+ * @Description 检测有没有登录的拦截器
  */
 public class LoginInterceptor implements HandlerInterceptor {
     public static final double LOWEST_ALLOW_VER = 4.4;
@@ -27,6 +28,7 @@ public class LoginInterceptor implements HandlerInterceptor {
                 return false;
             }
         }
+        //登录检测
         if (request.getSession().getAttribute(Constants.SESSION_USER) == null) {
             request.getRequestDispatcher("/checkLogin").forward(request, response);
             return false;

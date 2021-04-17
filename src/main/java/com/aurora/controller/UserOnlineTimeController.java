@@ -5,6 +5,9 @@ import com.aurora.domain.UserOnlineTime;
 import com.aurora.domain.base.Constants;
 import com.aurora.service.impl.UserOnlineTimeServiceImpl;
 import com.aurora.service.impl.UserServiceImpl;
+import com.aurora.util.Util;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -21,6 +25,7 @@ import java.util.*;
  */
 @Controller
 public class UserOnlineTimeController {
+    private static final Logger logger = LogManager.getLogger(UserOnlineTimeController.class);
     @Autowired
     UserOnlineTimeServiceImpl userOnlineTimeService;
     @Autowired
@@ -28,10 +33,16 @@ public class UserOnlineTimeController {
 
     @RequestMapping("/timer")
     @ResponseBody
-    public String timer(HttpServletRequest request) {
+    public String timer(HttpServletRequest request,@RequestParam String id) throws IOException {
+        //工作室判断
+        if(Util.ifInAuroraCheck() && !request.getRemoteAddr().contains("219.129.252")) {
+            logger.info("请在工作室计时");
+            return "请在工作室计时";
+        }
         UserData user = (UserData) request.getSession().getAttribute(Constants.SESSION_USER);
         //在service层里进行各种判断
         return String.valueOf(userOnlineTimeService.addTime(user.getId()));
+
     }
 
     @RequestMapping("/lastXWeek")

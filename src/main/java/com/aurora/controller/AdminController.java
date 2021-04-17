@@ -6,6 +6,7 @@ import com.aurora.domain.base.Constants;
 import com.aurora.service.impl.AdminServiceImpl;
 import com.aurora.service.impl.AdminUserServiceImpl;
 import com.aurora.service.impl.UserServiceImpl;
+import com.aurora.util.Util;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -47,22 +49,32 @@ public class AdminController {
 
     @PostMapping("/admin")
     @ResponseBody
-    public boolean doPost(HttpServletRequest request, String announcement, String dutyList, String freeTimeStart, String freeTimeEnd) throws ParseException {
+    public boolean doPost(HttpServletRequest request, String announcement, String dutyList, String freeTimeStart, String freeTimeEnd) throws Exception {
         //TODO:很多功能都可以改成会话方式获取
+        logger.info("尝试修改公告界面，新内容：");
+        logger.info(announcement);
+        logger.info(dutyList);
         //从会话里获取登录者
         UserData userData = (UserData) request.getSession().getAttribute(Constants.SESSION_USER);
         if(userData==null)
             return false;
         //检查该id是不是管理员
-        if (!adminUserService.isAdmin(userData.getId()))
+        if (!Util.isAdmin(userData.getId())) {
+            logger.info("不是管理员");
             return false;
+        }
         //准备插入数据
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss"); //（SimpleDateFormat永远滴神！！！）
         AdminData adminData = new AdminData(1, announcement, dutyList, sdf.parse(freeTimeStart), sdf.parse(freeTimeEnd));
-        logger.info("修改公告界面，新内容：");
-        logger.info(adminData.getAnnouncement());
-        logger.info(adminData.getDutylist());
-        return adminService.updateByIdSelective(adminData);
+        if(adminService.updateByIdSelective(adminData)) {
+            logger.info("修改成功");
+            return true;
+        }else {
+            logger.warn("修改失败");
+            return false;
+        }
+
+
     }
 
     @GetMapping("/admin")

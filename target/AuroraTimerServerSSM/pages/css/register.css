@@ -11,22 +11,27 @@ body {
 	font-weight: bold;
 	margin: 15px;
 	color: #000000;
+	height: 20px;
 }
 
 .wrong {
 	background: #F5F5F5;
 	font-weight: bold;
 	margin: 15px;
-	border: 1px #DD0000 solid;
+	border: 2px #DD0000 solid;
 	color: #000000;
+	height: 20px;
+
 }
 
 .right {
 	background: #F5F5F5;
 	font-weight: bold;
 	margin: 15px;
-	border: 1px #00DD00 solid;
+	border: 2px #37AA19 solid;
 	color: #000000;
+	height: 20px;
+
 }
 
 .login-top {
@@ -60,7 +65,7 @@ body {
 	width: 100%;
 	box-sizing: border-box;
 	padding: 0 40px;
-	margin-bottom: 30px
+	margin-bottom: 20px
 }
 
 .login-button {
