@@ -25,7 +25,7 @@ import java.util.*;
  */
 @Controller
 public class UserOnlineTimeController {
-    private static final Logger logger = LogManager.getLogger(UserOnlineTimeController.class);
+    public static final Logger logger = LogManager.getLogger(UserOnlineTimeController.class);
     @Autowired
     UserOnlineTimeServiceImpl userOnlineTimeService;
     @Autowired
@@ -35,7 +35,7 @@ public class UserOnlineTimeController {
     @ResponseBody
     public String timer(HttpServletRequest request,@RequestParam String id) throws IOException {
         //工作室判断
-        if(Util.ifInAuroraCheck() && !request.getRemoteAddr().contains("219.129.252")) {
+        if(!Util.isInAurora(request.getRemoteAddr())) {
             logger.info("请在工作室计时");
             return "请在工作室计时";
         }
