@@ -30,12 +30,12 @@
     <!--配置拦截器-->
     <mvc:interceptors>
         <!--登录检测功能-->
-        <mvc:interceptor>
-            <!--只检测计时和背景图功能-->
-            <mvc:mapping path="/timer"/>
-            <mvc:mapping path="/bg"/>
-            <bean class="com.aurora.interceptor.LoginInterceptor"/>
-        </mvc:interceptor>
+        <!--<mvc:interceptor>-->
+        <!--    &lt;!&ndash;只检测计时和背景图功能&ndash;&gt;-->
+        <!--    <mvc:mapping path="/timer"/>-->
+        <!--    <mvc:mapping path="/bg"/>-->
+        <!--    <bean class="com.aurora.interceptor.LoginInterceptor"/>-->
+        <!--</mvc:interceptor>-->
         <!--全局拦截器，打印客户端信息-->
         <mvc:interceptor>
             <mvc:mapping path="/**"/>

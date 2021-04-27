@@ -18,8 +18,10 @@ public class Util {
     /**
      * 判断是否在工作室
      * 需要在Constants.LOCAL_BG_BASE_PATH设置的目录下创建conf.properties配置文件，属性inAuroraCheck，ipWhiteList，ipBlackList
+     * （会不会放interceptor里好点）
+     * 如果传入的ip在WhiteList里返回true，在BlackList里返回false，其他情况返回true。不单纯用白名单是因为有可能在工作室连热点计时。（但是这样的话，就可以在宿舍开热点计时了。。。）
+     * 要禁止热点和其他的话就改成返回false
      *
-     * 如果传入的ip在WhiteList里返回true，在BlackList里返回false，其他情况返回true。不单纯用白名单是因为有可能在工作室连热点计时。
      * 配置文件里可以不完全输入，实现模糊匹配，如 219.129.252
      * @return true or false
      */
@@ -41,7 +43,8 @@ public class Util {
                 return false;
         }
         UserOnlineTimeController.logger.warn(" isInAurora(" + uIp + ") 未知ip：" + uIp);
-        return true;
+        //要禁止热点和其他的话就改成返回false
+        return false;
     }
 
 
