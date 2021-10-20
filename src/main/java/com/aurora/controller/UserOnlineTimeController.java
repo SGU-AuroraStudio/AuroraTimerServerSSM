@@ -68,12 +68,12 @@ public class UserOnlineTimeController {
         Date termStart;
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
-        int month = calendar.get(Calendar.MONTH);
+        int month = calendar.get(Calendar.MONTH);//从零开始计数
         //==计算学期开学时间==
         // 第一学期的开学日期
-        if (month > 9) { // 9月份之后-12月，为当前年份，比如2020-09是第一学期
+        if (month >= 8) { // 9月份之后-12月，为当前年份，比如2020-09是第一学期
             calendar.set(calendar.get(Calendar.YEAR), 9, 1);
-        } else if (month < 2) { // 2月份之前，是前一年开学的，比如2021-01开学时间是2020-09
+        } else if (month <= 1) { // 2月份之前，是前一年开学的，比如2021-01开学时间是2020-09
             calendar.set(calendar.get(Calendar.YEAR) - 1, 9, 1);
         }
         // 第二学期好办，假设2月1号开学，7月多放假。都在同一年，即当前年份
