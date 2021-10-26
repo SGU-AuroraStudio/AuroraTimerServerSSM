@@ -39,9 +39,11 @@ public class UserOnlineTimeController {
             logger.info("请在工作室计时");
             return "请在工作室计时";
         }
-        UserData user = (UserData) request.getSession().getAttribute(Constants.SESSION_USER);
-        //在service层里进行各种判断
-        return String.valueOf(userOnlineTimeService.addTime(user.getId()));
+        //掉线后不会重连原因，这里是通过session获取用户id，当服务器出现断线session被销毁，导致已开启的客户端对应的session值丢失，无法重连到服务器。
+//        UserData user = (UserData) request.getSession().getAttribute(Constants.SESSION_USER);
+//        //在service层里进行各种判断
+//        return String.valueOf(userOnlineTimeService.addTime(user.getId()));
+        return String.valueOf(userOnlineTimeService.addTime(id));
 
     }
 
