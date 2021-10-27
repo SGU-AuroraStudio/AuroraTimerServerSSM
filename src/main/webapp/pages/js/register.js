@@ -1,5 +1,4 @@
 window.onload = function() {
-
     document.getElementById("nickname").addEventListener("blur", checkNickname, false);
     document.getElementById("id").addEventListener("blur", checkId, false);
     document.getElementById("password").addEventListener("blur", checkPassword, false);
