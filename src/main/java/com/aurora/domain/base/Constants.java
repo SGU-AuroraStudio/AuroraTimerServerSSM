@@ -1,6 +1,9 @@
 package com.aurora.domain.base;
 
 import com.aurora.domain.UserData;
+import com.aurora.util.Util;
+
+import java.io.IOException;
 
 /**
  * @Author Yao
@@ -15,5 +18,14 @@ public class Constants {
 //    public static final String SERVER_BASE_HTTP_URL = "http://localhost:8080/timer";
 
     public static final String LOCAL_BG_BASE_PATH = "/root/timer";
-    public static final String SERVER_BASE_HTTP_URL = "http://47.99.134.104:8083/timer";
+    //将服务器ip写入到配置文件
+    public static String SERVER_BASE_HTTP_URL;
+    static {
+        try {
+            SERVER_BASE_HTTP_URL = "http://" + Util.getIp() + ":8080/timer";
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

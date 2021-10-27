@@ -65,4 +65,16 @@ public class Util {
         }
         return false;
     }
+
+    /**
+     *
+     * @return String
+     * @throws IOException
+     */
+    public static String getIp() throws IOException {
+        Properties properties = new Properties();
+        properties.load(new FileInputStream(new File(Constants.LOCAL_BG_BASE_PATH + "/conf.properties")));
+        String ip = properties.getProperty("ip");
+        return ip;
+    }
 }
