@@ -6,12 +6,11 @@ window.onload = function() {
     document.getElementById("conf").addEventListener("blur", checkConf, false);
 }
 
-function checkId(){
+function checkId() {
     var objElement = document.getElementById("id");
-    var msgElement = document.getElementById("id" + "Msg");
-    //var reg = /^[1-9][0-9]{5,13}$/;
-    //if(reg.test(objElement.value)) {
-    if(objElement.value != "") {
+    // var msgElement = document.getElementById("id" + "Msg");
+    var reg = /^[0-9]{5,13}$/;
+    if (reg.test(objElement.value)) {
         objElement.className = "right";
         // msgElement.innerHTML = "<font color='green'>yes</font>"
         return true;
@@ -22,10 +21,11 @@ function checkId(){
     }
 }
 
-function checkNickname(){
+function checkNickname() {
     var objElement = document.getElementById("nickname");
-    var msgElement = document.getElementById("nickname" + "Msg");
-    if (objElement.value != "") {
+    // var msgElement = document.getElementById("nickname" + "Msg");
+    var reg = /^[\u4E00-\u9FA5]{2,7}(·[\u4E00-\u9FA5]{1,10})?$/;
+    if (reg.test(objElement.value)) {
         // msgElement.innerHTML = "<font color='green'>yes</font>"
         objElement.className = "right";
         return true;
@@ -36,11 +36,11 @@ function checkNickname(){
     }
 }
 
-function checkPassword(){
+function checkPassword() {
     var objElement = document.getElementById("password");
-    var msgElement = document.getElementById("password" + "Msg");
+    // var msgElement = document.getElementById("password" + "Msg");
     var reg = /^\w{6,12}$/;
-    if(reg.test(objElement.value)) {
+    if (reg.test(objElement.value)) {
         objElement.className = "right";
         // msgElement.innerHTML = "<font color='green'>yes</font>"
         return true;
@@ -51,22 +51,22 @@ function checkPassword(){
     }
 }
 
-function checkConf(){
+function checkConf() {
     var objElement = document.getElementById("conf");
     var msgElement = document.getElementById("conf" + "Msg");
     var password = document.getElementById("password");
-    if (password.value == objElement.value) {
+    if (password.value == objElement.value && checkPassword()) {
         // msgElement.innerHTML = "<font color='green'>yes</font>";
         objElement.className = "right";
         return true;
-    } {
+    } else {
         // msgElement.innerHTML = "<font color='red'>no</font>";
         objElement.className = "wrong";
         return false;
     }
 }
 
-function checkAll(){
+function checkAll() {
     if (checkPassword() && checkNickname() && checkId() && checkConf()) {
         var nNickname = document.getElementById("nickname");
         var password = document.getElementById("password");
