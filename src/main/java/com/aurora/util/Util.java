@@ -67,6 +67,7 @@ public class Util {
     }
 
     /**
+     * 在配置文件中获取服务器ip
      *
      * @return String
      * @throws IOException
